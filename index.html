@@ -90,7 +90,7 @@
         {{if $value.children}}
           <dl class="layui-nav-child">
             {{each $value.children}}
-              <dd><a href="/pages{{$value.indexPath}}.html"><span class="layui-icon layui-icon-app"></span>{{$value.title}}</a></dd>
+              <dd><a href="/pages{{$value.indexPath}}.html" target="fm"><span class="layui-icon layui-icon-app"></span>{{$value.title}}</a></dd>
             {{/each}}
           </dl>
         {{/if}}

@@ -3,7 +3,9 @@ require.config({
     jquery: '/assets/lib/jquery',
     layui: '/assets/lib/layui/layui.all',
     axios: '/assets/lib/axios',
-    template: '/assets/lib/template-web'
+    template: '/assets/lib/template-web',
+    cropperjs: '/assets/lib/cropper/Cropper',
+    cropper: '/assets/lib/cropper/jquery-cropper'
   },
   shim: {
     layui: {
