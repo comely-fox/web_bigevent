@@ -1,6 +1,9 @@
 // axios 默认会将js对象序列化为json数据格式，从而content-type: application/json
-require(['layui', 'axios'], function ({ $, form, layer }, axios) {
-  console.dir($)
+require(['layui', 'axios', 'goIndexPage'], function (
+  { $, form, layer },
+  axios,
+  goIndexPage
+) {
   // 切换到注册窗口
   $('#js-to-reg').click(function (e) {
     e.preventDefault()
@@ -44,7 +47,7 @@ require(['layui', 'axios'], function ({ $, form, layer }, axios) {
       // 将token存储到本地
       localStorage.setItem('token', token)
       // 跳转到首页
-      location.href = '/index.html'
+      goIndexPage()
     })
     return false
   })

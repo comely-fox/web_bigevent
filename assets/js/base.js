@@ -2,7 +2,8 @@ require.config({
   paths: {
     jquery: '/assets/lib/jquery',
     layui: '/assets/lib/layui/layui.all',
-    axios: '/assets/lib/axios'
+    axios: '/assets/lib/axios',
+    template: '/assets/lib/template-web'
   },
   shim: {
     layui: {
@@ -12,7 +13,23 @@ require.config({
   }
 })
 
-require(['axios'], function (axios) {
+// 定义跳转到登录页模块
+define('goLoginPage', function () {
+  return function () {
+    window.top.location.href = '/login.html'
+    // 清除token
+    localStorage.removeItem('token')
+  }
+})
+
+// 定义跳转到主页模块
+define('goIndexPage', function () {
+  return function () {
+    location.href = '/index.html'
+  }
+})
+
+require(['axios', 'goLoginPage'], function (axios, goLoginPage) {
   // 配置默认的请求根url
   axios.defaults.baseURL = 'http://www.liulongbin.top:3008'
 
@@ -43,7 +60,7 @@ require(['axios'], function (axios) {
       const { response } = error
       // 身份认证失败, 服务器返回错误状态码401
       if (response.status === 401) {
-        window.top.location.href = '/login.html'
+        goLoginPage()
       }
       return Promise.reject(error)
     }
