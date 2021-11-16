@@ -5,7 +5,8 @@ require.config({
     axios: '/assets/lib/axios',
     template: '/assets/lib/template-web',
     cropperjs: '/assets/lib/cropper/Cropper',
-    cropper: '/assets/lib/cropper/jquery-cropper'
+    cropper: '/assets/lib/cropper/jquery-cropper',
+    moment: '/assets/lib/moment'
   },
   shim: {
     layui: {

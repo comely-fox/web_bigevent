@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文章分类</title>
+  <link rel="stylesheet" href="/assets/lib/layui/css/layui.css">
+  <link rel="stylesheet" href="/assets/css/atricle/atr-list.css">
+</head>
+
+<body>
+  <div class="layui-card">
+    <div class="layui-card-header">文章列表
+    </div>
+    <div class="layui-card-body">
+      <form class="layui-form" id="js-form-filter">
+        <div class="layui-form-item layui-inline">
+          <!-- 文章分类列表 -->
+          <select name="cate_id" id="js-atricle-all-cate">
+
+          </select>
+        </div>
+        <div class="layui-form-item layui-inline">
+          <select name="state">
+            <option value="">所有状态</option>
+            <option value="已发布">已发布</option>
+            <option value="草稿">草稿</option>
+          </select>
+        </div>
+        <div class="layui-form-item layui-inline">
+          <button type="button" class="layui-btn" lay-filter="form-filter" lay-submit>筛选</button>
+        </div>
+
+      </form>
+      <!-- 文章列表 -->
+      <table class="layui-table" id="js-tbody">
+        <colgroup>
+          <col>
+          <col width="150">
+          <col width="180">
+          <col width="150">
+          <col width="150">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>文章标题</th>
+            <th>分类</th>
+            <th>发表时间</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="js-tbody">
+
+        </tbody>
+      </table>
+
+      <!-- 分页 -->
+      <div class="pagition" id="js-pagition"></div>
+    </div>
+  </div>
+
+  <script type="text/html" id="js-tpl-atricle-all-cate">
+    <option value="">所有分类</option>
+    {{each $data}}
+    <option value="{{$value.id}}">{{$value.cate_name}}</option>
+    {{/each}}
+  </script>
+
+  <!-- 文章列表数据展示模板 -->
+  <script type="text/html" id="js-tpl-tbody">
+    {{each $data}}
+    <tr>
+      <td><a href="javascript:;" class="prview-atricle js-prview-atricle" data-id="{{$value.id}}" >{{$value.title}}</a></td>
+      <td>{{$value.cate_name}}</td>
+      <td>{{$value.pub_date|formDate}}</td>
+      <td>{{$value.state}}</td>
+      <td>
+        <button type="button" class="layui-btn layui-btn-xs js-btn-edit-atr">编辑</button>
+        <button data-id="{{$value.id}}" type="button" class="layui-btn layui-btn-danger layui-btn-xs js-btn-del-atr">删除</button>
+      </td>
+    </tr>
+    {{/each}}
+  </script>
+
+
+
+  <script type="text/html" id="js-tpl-prveiw-atricle">
+    <div class="atricle-wrapper">
+      <h1 class="atr-title">
+        {{$data.title}}
+      </h1>
+      <p class="atr-state">
+
+        <span class="author">作者：{{$data.nickname || $data.username}}</span>
+        <span class="pub-time">发布时间：{{$data.pub_date|formDate}}</span>
+        <span class="acte">所属分类：{{$data.cate_name}}</span>
+        <span class="state">状态：{{$data.state}}</span>
+      </p>
+      <hr>
+      <div class="atr-content">
+        <img src="{{$data.cover_img|formURL}}" alt="">
+
+        <div class="atr-detile">
+          {{@$data.content}}
+        </div>
+      </div>
+    </div>
+  </script>
+  <script data-main="/assets/js/atricle/atr-list.js" src="/assets/lib/require.js"></script>
+  <script src="/assets/js/base.js"></script>
+
+
+</body>
+
+</html>
